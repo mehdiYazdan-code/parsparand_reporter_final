@@ -1,9 +1,6 @@
 package com.armaninvestment.parsparandreporter.controllers;
 
-import com.armaninvestment.parsparandreporter.dtos.CustomerDto;
-import com.armaninvestment.parsparandreporter.dtos.CustomerSelectDto;
-import com.armaninvestment.parsparandreporter.dtos.MonthlyPayment;
-import com.armaninvestment.parsparandreporter.dtos.MonthlySales;
+import com.armaninvestment.parsparandreporter.dtos.*;
 import com.armaninvestment.parsparandreporter.entities.Customer;
 import com.armaninvestment.parsparandreporter.mappers.CustomerMapper;
 import com.armaninvestment.parsparandreporter.mappers.CustomerSelectMapper;
@@ -99,6 +96,25 @@ public class CustomerController {
         }
         return ResponseEntity.ok(monthlyPaymentList);
     }
+    @GetMapping("/{customerId}/{year}/monthly_report")
+    public ResponseEntity<List<MonthlyReport>> getCustomerSummary(
+            @PathVariable Integer customerId, @PathVariable Integer year) {
+
+        List<Object[]> report = repository.getMonthlyReport(customerId, year);
+        List<MonthlyReport> reportList = new ArrayList<>();
+        for (Object[] obj : report) {
+            MonthlyReport monthlyReport = new MonthlyReport();
+            monthlyReport.setId((Long) obj[0]);
+            monthlyReport.setName((String) obj[1]);
+            monthlyReport.setTotalAmount((BigDecimal) obj[2]);
+            monthlyReport.setTotalCount((Long) obj[3]);
+            monthlyReport.setAvgPrice((BigDecimal) obj[4]);
+            reportList.add(monthlyReport);
+        }
+
+        return ResponseEntity.ok(reportList);
+    }
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<CustomerDto> findById(@PathVariable("id") Long id){
         Optional<Customer> optionalCustomer = repository.findById(id);

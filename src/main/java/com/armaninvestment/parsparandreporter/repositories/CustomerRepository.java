@@ -1,7 +1,6 @@
 package com.armaninvestment.parsparandreporter.repositories;
 
 
-
 import com.armaninvestment.parsparandreporter.entities.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,4 +28,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM get_payments_by_year_group_by_month(cast(:year as smallint))")
     List<Object[]> findMonthlyPaymentsByPersianYear(Short year);
+
+    @Query(nativeQuery = true, value = "SELECT monthly_sales_by_month_and_year(cast(:customerId as integer), cast(:year as integer))")
+    List<Object[]> getMonthlyReport(Integer customerId, Integer year);
+
 }

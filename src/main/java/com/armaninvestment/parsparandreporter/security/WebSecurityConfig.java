@@ -93,13 +93,19 @@ public class WebSecurityConfig {
                         .allowedHeaders("Content-Type", "Authorization")
                         .allowCredentials(true)
                         .maxAge(3600);
-                registry.addMapping("/api/{year}/monthly-payments")
+                registry.addMapping("/api/customers/{year}/monthly-payments")
                         .allowedOrigins("http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("Content-Type", "Authorization")
                         .allowCredentials(true)
                         .maxAge(3600);
-                registry.addMapping("/api/{year}/monthly-sales")
+                registry.addMapping("/api/customers/{year}/monthly-sales")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedHeaders("Content-Type", "Authorization")
+                        .allowCredentials(true)
+                        .maxAge(3600);
+                registry.addMapping("/api/customers/{customerId}/{year}/monthly_report")
                         .allowedOrigins("http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("Content-Type", "Authorization")
