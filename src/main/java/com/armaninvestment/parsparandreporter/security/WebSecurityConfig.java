@@ -105,9 +105,9 @@ public class WebSecurityConfig {
                         .allowedHeaders("Content-Type", "Authorization")
                         .allowCredentials(true)
                         .maxAge(3600);
-                registry.addMapping("/api/customers/{customerId}/{year}/monthly_report")
+                registry.addMapping("/api/monthly-report/{year}/{month}")
                         .allowedOrigins("http://localhost:3000")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedMethods("GET")
                         .allowedHeaders("Content-Type", "Authorization")
                         .allowCredentials(true)
                         .maxAge(3600);

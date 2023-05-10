@@ -1,20 +1,45 @@
 package com.armaninvestment.parsparandreporter.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-@Data
-@AllArgsConstructor
+import java.util.Objects;
+
 @NoArgsConstructor
+@Getter
+@Setter
+@Entity
 public class CompanyReportDTO {
+    @Id
     private Long id;
     private String name;
-    private Integer currentMonthQuantity;
-    private Integer cumulativeQuantity;
-    private Double unitPriceAvg;
-    private Double currentMonthSales;
-    private String reportDate;
+    private Long quantity;
+    private Long avg_unit_price;
+    private Long amount;
+    private Long cumulative_quantity;
 
+    public CompanyReportDTO(Long id, String name, Long quantity, Long avg_unit_price, Long amount, Long cumulative_quantity) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.avg_unit_price = avg_unit_price;
+        this.amount = amount;
+        this.cumulative_quantity = cumulative_quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        CompanyReportDTO that = (CompanyReportDTO) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
 

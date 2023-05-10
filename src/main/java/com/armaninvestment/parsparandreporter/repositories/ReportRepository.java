@@ -15,4 +15,5 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     Page<Report> findByDateBetweenOrderByDateDesc(LocalDate fromDate, LocalDate toDate, Pageable paging);
     Page<Report> findByDateAfterOrderByDateDesc(LocalDate fromDate, Pageable paging);
     Page<Report> findByDateBeforeOrderByDateDesc(LocalDate toDate, Pageable paging);
+
 }
