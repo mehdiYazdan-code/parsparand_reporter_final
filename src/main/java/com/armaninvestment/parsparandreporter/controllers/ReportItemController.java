@@ -20,11 +20,5 @@ public class ReportItemController {
         this.repository = repository;
         this.mapper = mapper;
     }
-    @GetMapping("/{year}/{month}")
-    public List<CompanyReportDTO> getCompanyReportsByMonthAndYear(
-            @PathVariable Integer year,
-            @PathVariable Integer month
-    ) {
-        return repository.getCompanyReportsByMonthAndYear(month, year);
-    }
+
 }

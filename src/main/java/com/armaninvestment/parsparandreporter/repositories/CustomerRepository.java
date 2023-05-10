@@ -32,4 +32,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query(nativeQuery = true, value = "SELECT monthly_sales_by_month_and_year(cast(:customerId as integer), cast(:year as integer))")
     List<Object[]> getMonthlyReport(Integer customerId, Integer year);
 
+
+
 }
